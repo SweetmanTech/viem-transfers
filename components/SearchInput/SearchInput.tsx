@@ -11,7 +11,6 @@ const SearchInput = () => {
   };
 
   const onEnterPress = () => {
-    console.log('SWEETS redirect to /collector/{value}', value);
     push(`/collector/${value}`);
   };
 
