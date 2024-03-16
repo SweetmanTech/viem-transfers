@@ -1,6 +1,6 @@
 import getSortedLeaderboard from './getSortedLeaderboard';
-import { getProfileInfo } from './getProfileInfo';
 import { getDataWithNamesAndAvatars } from './getDataWithNamesAndAvatars';
+import { getProfileInfo } from './airstack/getProfileInfo';
 
 const getNames = async (rawData: any[]) => {
   const buyers = rawData.map((item) => item.buyer);
