@@ -14,6 +14,7 @@ const Page = ({ params }: { params: { collectorId: string } }) => (
       }}
       postUrl={`${VERCEL_URL}/api/frame`}
     />
+    <meta property="of:accepts:xmtp" content="2024-02-01" />
     <CollectorPage collectorId={params.collectorId} />
   </>
 );
