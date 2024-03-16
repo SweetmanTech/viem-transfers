@@ -2,7 +2,7 @@ import { VERCEL_URL } from '@/lib/consts';
 import getButtons from '@/lib/getButtons';
 import { FrameRequest, getFrameHtmlResponse } from '@coinbase/onchainkit';
 import { NextRequest, NextResponse } from 'next/server';
-import getCustodyOf from '@/lib/farcaster/getCustodyOf';
+import { getFarcasterConnectedAccount } from '@/lib/airstack/getFarcasterConnectedAccount';
 
 const getResponse = async (req: NextRequest): Promise<NextResponse> => {
   let address
@@ -10,7 +10,11 @@ const getResponse = async (req: NextRequest): Promise<NextResponse> => {
     const body: FrameRequest = await req.json();
     const { untrustedData } = body;
     const {fid} = untrustedData
-    address = await getCustodyOf(fid)
+    const response = await getFarcasterConnectedAccount(fid.toString())
+    const firstSocial = response?.data?.Socials?.Social?.[0]
+    const firstConnectedAccount = firstSocial?.connectedAddresses?.[0]?.address
+    const fallback = firstSocial?.userAddress
+    address = firstConnectedAccount || fallback
   } catch (error) {
     console.error('Error parsing JSON from request', error);
   }

@@ -1,4 +1,4 @@
-import { AIRSTACK_API_URL } from './consts';
+import { AIRSTACK_API_URL } from '../consts';
 
 export const getProfileInfo = async (buyers: string[]) => {
   const query = ` query MyQuery($buyers: [Address!]!, $identities:[Identity!]!){
