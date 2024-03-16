@@ -1,14 +1,8 @@
 import LandingPageHeader from '@/components/LandingPage/LandingPageHeader';
+import { boldFont, regularFont } from '@/lib/fonts';
 import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
-
-const regularFont = fetch(new URL('/public/assets/HelveticaNeueMedium.ttf', import.meta.url)).then(
-  (res) => res.arrayBuffer(),
-);
-const boldFont = fetch(new URL('/public/assets/HelveticaNeueBold.ttf', import.meta.url)).then(
-  (res) => res.arrayBuffer(),
-);
 
 export async function GET(req: NextRequest) {
   const [regularFontData, boldFontData] = await Promise.all([regularFont, boldFont]);

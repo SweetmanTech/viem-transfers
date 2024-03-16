@@ -1,6 +1,6 @@
 import CollectorPageHeader from '@/components/CollectorPage/CollectorPageHeader';
 import Results from '@/components/CollectorPage/Results';
-import LandingPageHeader from '@/components/LandingPage/LandingPageHeader';
+import { boldFont, regularFont } from '@/lib/fonts';
 import formatErc721Events from '@/lib/formatErc721Events';
 import get30DayBlockRange from '@/lib/get30DayBlockRange';
 import getEnsName from '@/lib/getEnsName';
@@ -8,13 +8,6 @@ import getErc721TransferEvents from '@/lib/getErc721TransferEvents';
 import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
-
-const regularFont = fetch(new URL('/public/assets/HelveticaNeueMedium.ttf', import.meta.url)).then(
-  (res) => res.arrayBuffer(),
-);
-const boldFont = fetch(new URL('/public/assets/HelveticaNeueBold.ttf', import.meta.url)).then(
-  (res) => res.arrayBuffer(),
-);
 
 export async function GET(req: NextRequest) {
   const [regularFontData, boldFontData] = await Promise.all([regularFont, boldFont]);
