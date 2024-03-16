@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'HelveticaNeue';
-  src: url('/fonts/HelveticaNeue.ttf') format('truetype');
+  src: url('/fonts/HelveticaNeue.ttc') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
