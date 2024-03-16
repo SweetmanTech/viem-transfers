@@ -4,9 +4,7 @@ export const VERCEL_URL = 'http://localhost:3000';
 export const DEFAULT_FRAME = {
   buttons: [
     {
-      action: 'link',
-      label: 'viem snapshot',
-      target: 'https://viem-snapshot.vercel.app',
+      label: 'see results',
     },
   ],
   image: {

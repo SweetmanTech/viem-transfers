@@ -1,4 +1,6 @@
+import CollectorPageHeader from '@/components/CollectorPage/CollectorPageHeader';
 import LandingPageHeader from '@/components/LandingPage/LandingPageHeader';
+import getEnsName from '@/lib/getEnsName';
 import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
@@ -12,7 +14,10 @@ const boldFont = fetch(new URL('/public/assets/HelveticaNeueBold.ttf', import.me
 
 export async function GET(req: NextRequest) {
   const [regularFontData, boldFontData] = await Promise.all([regularFont, boldFont]);
-
+  const queryParams = req.nextUrl.searchParams;
+  const address: any = queryParams.get('address');
+  console.log('SWEETS PASS PROP TO HTML', address);
+  const collectorId = await getEnsName(address);
   const { ImageResponse } = await import('@vercel/og');
   return new ImageResponse(
     (
@@ -33,7 +38,7 @@ export async function GET(req: NextRequest) {
         }}
         tw="flex gap-3"
       >
-        <LandingPageHeader />
+        <CollectorPageHeader collectorId={collectorId} />
       </div>
     ),
     {
