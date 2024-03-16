@@ -1,7 +1,7 @@
 const Results = ({ snapshot }: any) => (
   <table tw="w-[75vw] w-full flex flex-col">
     <thead>
-      <tr tw="flex w-full border border-sky-500 justify-around">
+      <tr tw="flex w-full border border-sky-500 justify-between">
         <th>Collection</th>
         <th>Number of Editions</th>
       </tr>
