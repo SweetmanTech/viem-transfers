@@ -5,6 +5,7 @@ import formatErc721Events from '@/lib/formatErc721Events';
 import get30DayBlockRange from '@/lib/get30DayBlockRange';
 import getEnsName from '@/lib/getEnsName';
 import getErc721TransferEvents from '@/lib/getErc721TransferEvents';
+import getSoundBatchCollectionMetadata from '@/lib/sound/getSoundBatchCollectionMetadata';
 import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
@@ -18,6 +19,8 @@ export async function GET(req: NextRequest) {
   const { fromBlock, toBlock } = await get30DayBlockRange();
   const filteredLogs = await getErc721TransferEvents([null, address], fromBlock, toBlock);
   const snapshot = formatErc721Events(filteredLogs);
+  let soundResponse = await getSoundBatchCollectionMetadata(snapshot);
+  soundResponse = soundResponse.sort((a: any, b: any) => b.numberOfEditions - a.numberOfEditions);
 
   return new ImageResponse(
     (
@@ -37,7 +40,7 @@ export async function GET(req: NextRequest) {
         }}
       >
         <CollectorPageHeader collectorId={collectorId} />
-        <Results snapshot={snapshot} />
+        <Results snapshot={soundResponse} />
       </div>
     ),
     {

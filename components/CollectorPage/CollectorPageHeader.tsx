@@ -7,7 +7,7 @@ const CollectorPageHeader = ({ collectorId }: any) => (
       {collectorId}
     </p>
     <p className="max-w-[600px] text-md md:text-xl font-bold" tw="text-2xl font-bold m-0">
-      showing purchases from past 30 days.
+      patronage - past 30 days.
     </p>
   </div>
 );

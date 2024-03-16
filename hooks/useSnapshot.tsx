@@ -1,12 +1,9 @@
-import getSnapshot from '@/lib/getSnapshot';
-import { ethPublicClient, optimismPublicClient } from '@/lib/publicClient';
 import { useEffect, useState } from 'react';
-import { isAddress, parseAbiItem, zeroAddress } from 'viem';
-import { normalize } from 'viem/ens';
 import useCollectorId from './useCollectorId';
 import getErc721TransferEvents from '@/lib/getErc721TransferEvents';
 import formatErc721Events from '@/lib/formatErc721Events';
 import get30DayBlockRange from '@/lib/get30DayBlockRange';
+import getSoundBatchCollectionMetadata from '@/lib/sound/getSoundBatchCollectionMetadata';
 
 const useSnapshot = (collectorId: string) => {
   const [snapshot, setSnapshot] = useState([] as any);
@@ -20,8 +17,14 @@ const useSnapshot = (collectorId: string) => {
         fromBlock,
         toBlock,
       );
-      const result = formatErc721Events(filteredLogs);
-      setSnapshot(result);
+      const eventResponse = formatErc721Events(filteredLogs);
+
+      let soundResponse = await getSoundBatchCollectionMetadata(eventResponse);
+      soundResponse = soundResponse.sort(
+        (a: any, b: any) => b.numberOfEditions - a.numberOfEditions,
+      );
+
+      setSnapshot(soundResponse);
     };
 
     if (!collectorAddress) return;
