@@ -4,7 +4,7 @@ import { optimismPublicClient } from './publicClient';
 const getErc721TransferEvents = async (args: any, fromBlock: any, toBlock: any) => {
   const logs = await optimismPublicClient.getLogs({
     event: parseAbiItem('event Transfer(address indexed, address indexed, uint256)'),
-    args: [null, '0xcfBf34d385EA2d5Eb947063b67eA226dcDA3DC38'],
+    args,
     fromBlock,
     toBlock,
   });
