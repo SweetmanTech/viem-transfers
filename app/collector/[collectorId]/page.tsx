@@ -1,25 +1,19 @@
-import { getFrameMetadata } from '@coinbase/onchainkit';
-import type { Metadata } from 'next';
-import { DEFAULT_FRAME, VERCEL_URL } from '@/lib/consts';
+import { FrameMetadata, getFrameMetadata } from '@coinbase/onchainkit';
+import { VERCEL_URL } from '@/lib/consts';
 import CollectorPage from '@/components/CollectorPage';
-
-const frameMetadata = { ...getFrameMetadata(DEFAULT_FRAME), 'of:accepts:xmtp': '2024-02-01' };
-
-export const metadata: Metadata = {
-  title: 'viem snapshot',
-  description: 'viem snapshot',
-  openGraph: {
-    title: 'viem snapshot',
-    description: 'viem snapshot',
-    images: [`https://${VERCEL_URL}/api/og`],
-  },
-  other: {
-    ...frameMetadata,
-  },
-};
+import getButtons from '@/lib/getButtons';
 
 const Page = ({ params }: { params: { collectorId: string } }) => (
   <>
+    <FrameMetadata
+      ogTitle="viem snapshot"
+      ogDescription="viem snapshot"
+      buttons={getButtons(params.collectorId)}
+      image={{
+        src: `${VERCEL_URL}/api/images/collector/collections?address=${params.collectorId}`,
+      }}
+      postUrl={`${VERCEL_URL}/api/frame`}
+    />
     <CollectorPage collectorId={params.collectorId} />
   </>
 );
