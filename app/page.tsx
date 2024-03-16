@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 
 const Page = () => (
   <>
+    <meta property="of:accepts:xmtp" content="2024-02-01" />
     <LandingPage />
   </>
 );
