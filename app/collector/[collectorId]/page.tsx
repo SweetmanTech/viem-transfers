@@ -1,4 +1,4 @@
-import { FrameMetadata, getFrameMetadata } from '@coinbase/onchainkit';
+import { FrameMetadata } from '@coinbase/onchainkit';
 import { VERCEL_URL } from '@/lib/consts';
 import CollectorPage from '@/components/CollectorPage';
 import getButtons from '@/lib/getButtons';
