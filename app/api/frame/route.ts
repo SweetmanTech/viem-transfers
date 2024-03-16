@@ -18,7 +18,7 @@ const getResponse = async (req: NextRequest): Promise<NextResponse> => {
   } catch (error) {
     console.error('Error parsing JSON from request', error);
   }
-  const buttons = getButtons();
+  const buttons = getButtons(address);
   const frame = {
     buttons,
     image: {
