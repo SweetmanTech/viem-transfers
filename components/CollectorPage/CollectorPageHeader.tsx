@@ -1,6 +1,5 @@
 const CollectorPageHeader = ({ collectorId }: any) => (
   <div
-    style={{ display: 'flex' }}
     className="space-y-3 flex flex-col"
     tw="flex flex-col items-center text-center w-[1000px] mb-3"
   >
