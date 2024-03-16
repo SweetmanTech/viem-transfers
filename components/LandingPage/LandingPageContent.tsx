@@ -6,7 +6,7 @@ const LandingPageContent = () => (
     <LandingPageHeader />
     <Snapshot />
     <a
-      href="https://github.com/SweetmanTech/viem-snapshot"
+      href="https://github.com/SweetmanTech/viem-transfers"
       target="_blank"
       className="flex justify-center items-center gap-5"
     >
