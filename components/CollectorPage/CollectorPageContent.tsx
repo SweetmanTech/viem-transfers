@@ -1,10 +1,10 @@
-import SearchInput from '../SearchInput';
-import LandingPageHeader from './LandingPageHeader';
+import CollectorPageHeader from './CollectorPageHeader';
+import Results from './Results';
 
-const LandingPageContent = () => (
+const CollectorPageContent = () => (
   <div className="container flex flex-col items-center justify-center gap-4 px-4 text-center sm:gap-8 md:px-6">
-    <LandingPageHeader />
-    <SearchInput />
+    <CollectorPageHeader />
+    <Results />
     <a
       href="https://github.com/SweetmanTech/viem-transfers"
       target="_blank"
@@ -15,4 +15,4 @@ const LandingPageContent = () => (
   </div>
 );
 
-export default LandingPageContent;
+export default CollectorPageContent;

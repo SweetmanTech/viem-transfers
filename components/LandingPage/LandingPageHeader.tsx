@@ -14,7 +14,7 @@ const LandingPageHeader = () => (
       className="max-w-[600px] text-md md:text-xl font-bold"
       tw="max-w-[600px] text-4xl font-bold mt-[-25]"
     >
-      showing nft purchases over the past 30 days.
+      search any collector.
     </p>
   </div>
 );
