@@ -20,13 +20,11 @@ export async function GET(req: NextRequest) {
   const [regularFontData, boldFontData] = await Promise.all([regularFont, boldFont]);
   const queryParams = req.nextUrl.searchParams;
   const address: any = queryParams.get('address');
-  console.log('SWEETS PASS PROP TO HTML', address);
   const collectorId = await getEnsName(address);
   const { ImageResponse } = await import('@vercel/og');
   const { fromBlock, toBlock } = await get30DayBlockRange();
   const filteredLogs = await getErc721TransferEvents([null, address], fromBlock, toBlock);
   const snapshot = formatErc721Events(filteredLogs);
-  console.log('SWEETS SNAPSHOT', snapshot);
 
   return new ImageResponse(
     (
