@@ -1,18 +1,16 @@
-import { FRAME_INPUT_PLACEHOLDER, VERCEL_URL } from '@/lib/consts';
+import { VERCEL_URL } from '@/lib/consts';
 import getButtons from '@/lib/getButtons';
-import getCreatorId from '@/lib/getCreatorId';
 import { FrameRequest, getFrameHtmlResponse } from '@coinbase/onchainkit';
 import { NextRequest, NextResponse } from 'next/server';
+import getCustodyOf from '@/lib/farcaster/getCustodyOf';
 
 const getResponse = async (req: NextRequest): Promise<NextResponse> => {
-  let buttonIndex = 1;
-  let creatorId
+  let address
   try {
     const body: FrameRequest = await req.json();
     const { untrustedData } = body;
-    const {url, inputText} = untrustedData
-    creatorId = await getCreatorId(inputText, url)
-    buttonIndex = untrustedData.buttonIndex;
+    const {fid} = untrustedData
+    address = await getCustodyOf(fid)
   } catch (error) {
     console.error('Error parsing JSON from request', error);
   }
@@ -20,11 +18,7 @@ const getResponse = async (req: NextRequest): Promise<NextResponse> => {
   const frame = {
     buttons,
     image: {
-      src: `${VERCEL_URL}/api/leaderboard?creator=${creatorId}`,
-      aspectRatio: '1:1',
-    },
-    input:{
-      text: FRAME_INPUT_PLACEHOLDER,
+      src: `${VERCEL_URL}/api/images/collector/collections?address=${address}`,
     },
     postUrl: `${VERCEL_URL}/api/frame`,
   } as any;
