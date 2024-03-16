@@ -18,7 +18,6 @@ const getSoundBatchCollectionMetadata = async (formattedSoundCollections: any) =
 
   const fetchPromises = filteredResults.map((result: any) => {
     const txId = result.result.replace('ar://', '');
-    console.log('SWEETS txId', txId);
     return fetch(`https://arweave.net/${txId}`);
   });
 
