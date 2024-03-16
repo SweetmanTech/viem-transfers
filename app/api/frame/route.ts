@@ -19,10 +19,11 @@ const getResponse = async (req: NextRequest): Promise<NextResponse> => {
     console.error('Error parsing JSON from request', error);
   }
   const buttons = getButtons(address);
+  const imageSrc = `${VERCEL_URL}/api/images/collector/collections?address=${address}`
   const frame = {
     buttons,
     image: {
-      src: `${VERCEL_URL}/api/images/collector/collections?address=${address}`,
+      src: imageSrc,
     },
     postUrl: `${VERCEL_URL}/api/frame`,
   } as any;
