@@ -1,29 +1,25 @@
-import { ethPublicClient } from '@/lib/publicClient';
+import tryEnsAddressLookup from '@/lib/tryEnsAddressLookup';
 import { useEffect, useState } from 'react';
 import { isAddress } from 'viem';
-import { normalize } from 'viem/ens';
 
 const useCollectorId = (collectorId: string) => {
   const [collectorAddress, setCollectorAddress] = useState('' as any);
 
   useEffect(() => {
     const fetchENSAddress = async () => {
-      if (isAddress(collectorId)) {
-        setCollectorAddress(collectorId);
-      }
-      if (collectorId.includes('.eth')) {
-        try {
-          const ensAddress = await ethPublicClient.getEnsAddress({
-            name: normalize(collectorId),
-          });
-          setCollectorAddress(ensAddress);
-        } catch (error) {
-          console.error('Failed to get ENS address:', error);
-        }
-      }
+      const response = await tryEnsAddressLookup(collectorId);
+      if (response.error) return;
+      setCollectorAddress(response.data);
     };
 
-    fetchENSAddress();
+    if (isAddress(collectorId)) {
+      setCollectorAddress(collectorId);
+      return;
+    }
+
+    if (collectorId.includes('.eth')) {
+      fetchENSAddress();
+    }
   }, [collectorId]);
 
   return { collectorAddress };
